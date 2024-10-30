@@ -28,6 +28,17 @@ describe('BaseComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should add subscriptions on init', () => {
+    const destroy = spyOn(component, 'ngOnInit').and.callThrough();
+    const addSubscriptions = spyOn(component as any, 'addSubscriptions');
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    expect(destroy).toHaveBeenCalled();
+    expect(addSubscriptions).toHaveBeenCalled();
+  });
+
   it('should mark for check', () => {
     const markForCheck = spyOn(component['changeDetectorRef'], 'markForCheck');
 
