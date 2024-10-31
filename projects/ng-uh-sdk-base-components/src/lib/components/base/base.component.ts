@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { IBaseComponent } from '../../interfaces/base/base.interface';
+import { IBaseComponent } from '../../interfaces/base-component.interface';
 import { Subscription } from 'rxjs';
 
 @Component({

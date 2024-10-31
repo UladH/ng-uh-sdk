@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IBaseComponentService } from '../../interfaces/base/base-service.interface';
+import { IBaseComponentService } from '../../interfaces/base-component-service.interface';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 
 @Injectable()
