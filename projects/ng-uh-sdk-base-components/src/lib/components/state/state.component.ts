@@ -25,14 +25,14 @@ export abstract class StateComponent extends BaseComponent implements IStateComp
 
   //#region getters setters
 
-  public get state(): ComponentState {
-    return this._state
-  }
-
   protected set state(value: ComponentState){
     this._state = value;
     this.onStateChanged.emit(value);
     this.markChanges();
+  }
+
+  public get state(): ComponentState {
+    return this._state
   }
 
   //#endregion
