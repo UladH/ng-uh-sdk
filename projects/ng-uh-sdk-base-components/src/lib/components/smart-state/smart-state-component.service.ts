@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SmartComponentService } from '../smart/smart.-component.service';
+import { SmartComponentService } from '../smart/smart-component.service';
 import { IStateComponentService } from '../../interfaces/state-component-service.interface';
 import { ComponentState } from '../../constants/component-state.enum';
 import { Observable, Subject } from 'rxjs';

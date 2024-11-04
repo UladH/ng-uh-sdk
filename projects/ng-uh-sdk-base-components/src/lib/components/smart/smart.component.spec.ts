@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmartComponent } from './smart.component';
 import { ChangeDetectorRef, Component, Injectable } from '@angular/core';
-import { SmartComponentService } from './smart.-component.service';
+import { SmartComponentService } from './smart-component.service';
+import { BaseComponent } from '../_index';
 
 @Injectable()
 export class SmartComponentTestService extends SmartComponentService {}
@@ -58,10 +59,10 @@ describe('SmartComponent', () => {
   });
 
   it('should call componentService.ngOnInit before super.ngOnInit', () => {
-    const superNgOnInitSpy = spyOn(SmartComponent.prototype, 'ngOnInit');
+    const superNgOnInitSpy = spyOn(BaseComponent.prototype, 'ngOnInit').and.callThrough();
 
     component.ngOnInit();
 
-    expect(componentServiceSpy.ngOnInit).toHaveBeenCalledBefore(superNgOnInitSpy);
+    expect(componentServiceSpy.ngOnInit).toHaveBeenCalledBefore(BaseComponent.prototype.ngOnInit);
   });
 });

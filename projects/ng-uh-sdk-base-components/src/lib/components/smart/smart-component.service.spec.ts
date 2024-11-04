@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { SmartComponentService } from './smart.-component.service';
+import { SmartComponentService } from './smart-component.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()

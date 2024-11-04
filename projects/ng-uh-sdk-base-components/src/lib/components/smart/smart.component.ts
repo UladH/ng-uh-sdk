@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { ISmartComponent } from '../../interfaces/smart-component.interface';
-import { SmartComponentService } from './smart.-component.service';
+import { SmartComponentService } from './smart-component.service';
 
 @Component({
   template: ''
