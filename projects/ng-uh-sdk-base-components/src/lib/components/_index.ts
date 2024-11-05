@@ -13,3 +13,6 @@ export * from './form/form.component';
 
 export * from './smart-form/smart-form-component.service';
 export * from './smart-form/smart-form.component';
+
+export * from './smart-form-state/smart-form-state-component.service';
+export * from './smart-form-state/smart-form-state.component';
