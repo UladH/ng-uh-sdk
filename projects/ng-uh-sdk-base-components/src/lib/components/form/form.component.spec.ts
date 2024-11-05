@@ -20,17 +20,6 @@ class FormModel{
 class FormTestComponent extends FormComponent<FormModel> {
   protected override defaultValue: FormModel = {}
 
-  //#region constructor
-
-  constructor(
-    changeDetectorRef: ChangeDetectorRef,
-    formBuilder: FormBuilder,
-  ){
-    super(changeDetectorRef, formBuilder)
-  }
-
-  //#endregion
-
   //#region protected
 
   protected override initForm(): void {

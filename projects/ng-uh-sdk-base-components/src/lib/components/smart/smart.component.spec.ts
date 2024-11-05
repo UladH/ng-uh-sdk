@@ -18,29 +18,21 @@ class SmartTestComponent extends SmartComponent {
   ){
     super(changeDetectorRef, componentService);
   }
-
-  public override addSubscriptions(): void {
-
-  }
 }
 
 describe('SmartComponent', () => {
   let component: SmartTestComponent;
   let fixture: ComponentFixture<SmartTestComponent>;
-  let componentServiceSpy: jasmine.SpyObj<SmartComponentTestService>;
 
   beforeEach(async () => {
-    componentServiceSpy = jasmine.createSpyObj(SmartComponentTestService, ['ngOnInit']);
-
     await TestBed.configureTestingModule({
       declarations: [SmartTestComponent],
-      providers: [{ provide: SmartComponentTestService, useValue: componentServiceSpy }],
+      providers: [SmartComponentTestService],
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(SmartTestComponent);
     component = fixture.componentInstance;
-    spyOn(component, 'addSubscriptions').and.returnValue();
     fixture.detectChanges();
   });
 
@@ -50,19 +42,22 @@ describe('SmartComponent', () => {
 
   it('should call component service ngOnInit method in component ngOnInit method', () => {
     const init = spyOn(component, 'ngOnInit').and.callThrough();
+    const ngOnInitSpy = spyOn((component as any).componentService, 'ngOnInit');
 
     component.ngOnInit();
     fixture.detectChanges();
 
     expect(init).toHaveBeenCalled();
-    expect(componentServiceSpy.ngOnInit).toHaveBeenCalled();
+    expect(ngOnInitSpy).toHaveBeenCalled();
   });
 
   it('should call componentService.ngOnInit before super.ngOnInit', () => {
     const superNgOnInitSpy = spyOn(BaseComponent.prototype, 'ngOnInit').and.callThrough();
+    const ngOnInitSpy = spyOn((component as any).componentService, 'ngOnInit');
 
     component.ngOnInit();
+    fixture.detectChanges();
 
-    expect(componentServiceSpy.ngOnInit).toHaveBeenCalledBefore(BaseComponent.prototype.ngOnInit);
+    expect(ngOnInitSpy).toHaveBeenCalledBefore(BaseComponent.prototype.ngOnInit);
   });
 });
