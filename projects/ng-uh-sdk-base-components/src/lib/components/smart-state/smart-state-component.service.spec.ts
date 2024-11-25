@@ -20,20 +20,4 @@ describe('SmartStateService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('should call "next" stateChangedSubject$ in state setter', () => {
-    const emit = spyOn(service['stateChangedSubject$'], 'next');
-
-    service['state'] = ComponentState.Content;
-
-    expect(emit).toHaveBeenCalledWith(ComponentState.Content);
-  });
-
-  it('should call "emit" stateChangedSubject$ in state setter', () => {
-    const emit = spyOn(service['stateChangedSubject$'], 'next');
-
-    service['state'] = ComponentState.Content;
-
-    expect(emit).toHaveBeenCalledWith(ComponentState.Content);
-  });
 });

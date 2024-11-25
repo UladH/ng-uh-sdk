@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, EventEmitter, Output, signal, WritableSignal } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { IStateComponent } from '../../interfaces/state-component.interface';
 import { ComponentState } from '../../constants/component-state.enum';
@@ -11,7 +11,7 @@ export abstract class StateComponent extends BaseComponent implements IStateComp
 
   public readonly COMPONENT_STATE = ComponentState;
 
-  protected _state: ComponentState = ComponentState.Content;
+  protected _state: WritableSignal<ComponentState> = signal(ComponentState.Content);
 
   //#region constructor
 
@@ -25,16 +25,18 @@ export abstract class StateComponent extends BaseComponent implements IStateComp
 
   //#region getters setters
 
-  protected set state(value: ComponentState){
-    this._state = value;
-    this.onStateChanged.emit(value);
-    this.markChanges();
+  public get state(): WritableSignal<ComponentState> {
+    return this._state;
   }
 
-  public get state(): ComponentState {
-    return this._state
-  }
+  //#endregion
 
+  //#region effects
+
+  protected stateEffect = effect(() => {
+    this.onStateChanged.emit(this.state());
+  });
+  
   //#endregion
 }
 

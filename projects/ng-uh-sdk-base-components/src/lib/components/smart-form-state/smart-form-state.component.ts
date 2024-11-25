@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, EventEmitter, Output, WritableSignal } from '@angular/core';
 import { SmartFormComponent } from '../smart-form/smart-form.component';
 import { IStateComponent } from '../../interfaces/state-component.interface';
 import { ComponentState } from '../../constants/component-state.enum';
@@ -25,27 +25,17 @@ export abstract class SmartFormStateComponent<T> extends SmartFormComponent<T> i
 
   //#region getters setters
 
-  public get state(): ComponentState {
+  public get state(): WritableSignal<ComponentState> {
     return this.componentService.state;
   }
 
   //#endregion
+  
+  //#region effects
 
-  //#region protected
-
-  protected onStateChangedHandler(value: ComponentState): void{
-    this.onStateChanged.emit(value);
-    this.markChanges();
-  }
-
-  protected override addSubscriptions(): void{
-    super.addSubscriptions();
-
-    this.subscriptions.add(
-      this.componentService.stateChanged$.subscribe(this.onStateChangedHandler.bind(this))
-    );
-  }
-
+  protected stateEffect = effect(() => {
+    this.onStateChanged.emit(this.state());
+  });
+  
   //#endregion
-
 }

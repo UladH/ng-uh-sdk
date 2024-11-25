@@ -1,7 +1,6 @@
-import { Observable } from "rxjs";
 import { ComponentState } from "../constants/component-state.enum";
+import { WritableSignal } from "@angular/core";
 
 export interface IStateComponentService {
-  get state(): ComponentState;
-  get stateChanged$(): Observable<ComponentState>
+  get state(): WritableSignal<ComponentState>;
 }
